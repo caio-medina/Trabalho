@@ -26,7 +26,7 @@ public class Proprietario extends RealmObject implements Serializable {
     private String latitude;
     private String longitude;
 
-    public Proprietario() {
+    public Proprietario(int i, String concat, String s, String concat1) {
     }
 
     public Proprietario(int id, String nome, String endereco, String bairro, String cidade, String cnh, String telefone, String email, String latitude, String longitude) {
