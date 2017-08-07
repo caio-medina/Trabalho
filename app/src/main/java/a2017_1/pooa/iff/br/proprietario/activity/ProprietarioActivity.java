@@ -20,8 +20,12 @@ import a2017_1.pooa.iff.br.proprietario.R;
 import a2017_1.pooa.iff.br.proprietario.adapter.ClickRecyclerViewListener;
 import a2017_1.pooa.iff.br.proprietario.adapter.ProprietarioAdapter;
 import a2017_1.pooa.iff.br.proprietario.model.Proprietario;
+import io.realm.Realm;
+
 public class ProprietarioActivity extends AppCompatActivity implements ClickRecyclerViewListener {
 
+
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +36,13 @@ public class ProprietarioActivity extends AppCompatActivity implements ClickRecy
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_Proprietario);
 
-        recyclerView.setAdapter(new ProprietarioAdapter(getProprietarios(),this,this));
+        recyclerView.setAdapter(new ProprietarioAdapter(getProprietario(),this,this));
         RecyclerView.LayoutManager layout = new LinearLayoutManager(this,
                 LinearLayoutManager.VERTICAL, false);
 
         recyclerView.setLayoutManager(layout);
+
+        realm = Realm.getDefaultInstance();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -48,19 +54,14 @@ public class ProprietarioActivity extends AppCompatActivity implements ClickRecy
         });
     }
 
-    private List<Proprietario> getLivros(){
-        List<Proprietario> proprietarios = new ArrayList<Proprietario>();
-        int i =0;
-        for(i=0;i<=20;i++){
-            String iv = String.valueOf(i);
-            Proprietario proprietario = new Proprietario(i,"Nome".concat(iv),"Endereço".concat(iv),"Email".concat(iv));
-            proprietario.add(proprietario);
-        }
-        return proprietarios;
 
+
+    private List<Proprietario> getProprietario(){
+
+        return (List)realm.where(Proprietario.class).findAll();
     }
 
-    @Override
+
     public void onClick(Object object) {
         Proprietario proprietario = (Proprietario) object;
         //Intent intent = new Intent(this, ProprietarioDestaque.class);
@@ -68,4 +69,16 @@ public class ProprietarioActivity extends AppCompatActivity implements ClickRecy
         //startActivity(intent);
 
     }
+
+    protected void onResume() {
+                super.onResume();
+                RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv_Proprietario);
+
+                        recyclerView.setAdapter(new ProprietarioAdapter(getProprietario(),this,this));
+                RecyclerView.LayoutManager layout = new LinearLayoutManager(this,
+                                LinearLayoutManager.VERTICAL, false);
+
+                        recyclerView.setLayoutManager(layout);
+
+                    }
 }
