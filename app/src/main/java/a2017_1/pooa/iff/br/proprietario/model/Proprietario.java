@@ -1,4 +1,4 @@
-package a2017_1.pooa.iff.br.proprietario;
+package a2017_1.pooa.iff.br.proprietario.model;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
