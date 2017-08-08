@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button livroBT = (Button) findViewById(R.id.bt_proprietarios);
+        Button livroBT = (Button) findViewById(R.id.bt_proprietario);
 
         livroBT.setOnClickListener(new View.OnClickListener() {
             @Override

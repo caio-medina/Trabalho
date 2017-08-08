@@ -4,6 +4,7 @@ package a2017_1.pooa.iff.br.proprietario.activity;
  * Created by user on 07/08/17.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -64,9 +65,9 @@ public class ProprietarioActivity extends AppCompatActivity implements ClickRecy
 
     public void onClick(Object object) {
         Proprietario proprietario = (Proprietario) object;
-        //Intent intent = new Intent(this, ProprietarioDestaque.class);
-        //intent.putExtra("proprietario", proprietario);
-        //startActivity(intent);
+        Intent intent = new Intent(this, ProprietarioDetalhe.class);
+        intent.putExtra("proprietario", proprietario);
+        startActivity(intent);
 
     }
 
@@ -81,4 +82,10 @@ public class ProprietarioActivity extends AppCompatActivity implements ClickRecy
                         recyclerView.setLayoutManager(layout);
 
                     }
+
+    @Override
+    public void finish(){
+        realm.close();
+
+    }
 }
